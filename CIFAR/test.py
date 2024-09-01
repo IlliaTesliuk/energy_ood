@@ -46,8 +46,9 @@ parser.add_argument('--T', default=1., type=float, help='temperature: energy|Odi
 parser.add_argument('--noise', type=float, default=0, help='noise for Odin')
 args = parser.parse_args()
 print(args)
-# torch.manual_seed(1)
-# np.random.seed(1)
+
+torch.manual_seed(42)
+np.random.seed(42)
 
 # mean and standard deviation of channels of CIFAR-10 images
 mean = [x / 255 for x in [125.3, 123.0, 113.9]]
@@ -99,7 +100,7 @@ if args.ngpu > 1:
 
 if args.ngpu > 0:
     net.cuda()
-    # torch.cuda.manual_seed(1)
+    torch.cuda.manual_seed(42)
 
 cudnn.benchmark = True  # fire on all cylinders
 

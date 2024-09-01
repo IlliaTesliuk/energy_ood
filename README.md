@@ -1,3 +1,21 @@
+# Master thesis: Threshold optimization for detecting of out-of-distribution data
+
+Run classifier's fine-tuning:
+```
+python train.py cifar10 --model wrn --model_path PRETRAINED_PATH --score energy --m_in M_IN --m_out M_OUT --ood_dataset tinyimages300k --seed 42
+```
+
+Compute logits on source (training, validation, synthetic) and test datasets:
+```
+python compute_logits.py --ckpt FINETUNED_PATH --run_dir OUTPUT_DIR --batch_size 32 --source --test --all
+```
+
+Analyze the selected thresholds: compute negative energy scores, OOD detection errors, produce the corresponding plots.
+```
+python analyze_scores.py --run_dir OUTPUT_DIR
+```
+
+
 # Energy-based Out-of-distribution Detection (Energy OOD)
 
 This repository is the official implementation of [Energy-based Out-of-distribution Detection](https://arxiv.org/abs/2010.03759) by Weitang Liu, Xiaoyun Wang, John Owens and Yixuan Li. This method is an effective and easy OOD detector with and without fine-tuning. Our code is implemented with courtesy of [Outlier-Exposure](https://github.com/hendrycks/outlier-exposure). If you have any code related questions, such as [this issue](https://github.com/wetliu/energy_ood/issues/9) and [this issue](https://github.com/wetliu/energy_ood/issues/2), we highly recommened to check the couterpart in [Outlier-Exposure](https://github.com/hendrycks/outlier-exposure). 
